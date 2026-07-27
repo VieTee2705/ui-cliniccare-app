@@ -5,7 +5,7 @@
     <aside class="w-64 bg-gradient-to-b from-indigo-900 to-indigo-800 flex flex-col transition-all duration-300 z-20 shadow-xl">
       <!-- Logo -->
       <div class="h-20 flex items-center px-6 border-b border-white/10">
-        <router-link to="/patient" class="flex items-center gap-3">
+        <router-link to="/menu" class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-500 to-indigo-400 flex items-center justify-center text-white shadow-lg">
             <i class="ph-fill ph-heartbeat text-2xl"></i>
           </div>
