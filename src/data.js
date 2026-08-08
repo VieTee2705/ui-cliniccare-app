@@ -113,3 +113,30 @@ export const chartData = {
   }
 }
 
+export const patientAppointments = [
+  { id: 'A1', date: '2026-08-15', time: '09:30', doctor: 'BS. Lê Tuấn', department: 'Khoa Nội chung', status: 'upcoming', type: 'Khám mới' },
+  { id: 'A2', date: '2026-08-20', time: '14:00', doctor: 'BS. Nguyễn Hà', department: 'Răng Hàm Mặt', status: 'pending', type: 'Tái khám' },
+  { id: 'A3', date: '2026-07-10', time: '08:15', doctor: 'BS. Vũ Đức', department: 'Khoa Xét nghiệm', status: 'completed', type: 'Khám định kỳ' },
+  { id: 'A4', date: '2026-06-05', time: '10:45', doctor: 'BS. Lê Tuấn', department: 'Khoa Nội chung', status: 'cancelled', type: 'Khám mới' }
+]
+
+export const patientHistory = [
+  { id: 'H1', date: '2026-07-10', doctor: 'BS. Vũ Đức', diagnosis: 'Rối loạn lipid máu nhẹ', prescription: 'Atorvastatin 10mg, Omega 3', notes: 'Hạn chế dầu mỡ, tập thể dục 30p/ngày' },
+  { id: 'H2', date: '2026-05-12', doctor: 'BS. Lê Tuấn', diagnosis: 'Viêm họng cấp', prescription: 'Amoxicillin 500mg, Alpha Choay', notes: 'Uống nhiều nước ấm, súc miệng nước muối' },
+  { id: 'H3', date: '2026-01-10', doctor: 'BS. Nguyễn Hà', diagnosis: 'Răng khôn mọc lệch', prescription: 'Ibuprofen 400mg', notes: 'Chờ nhổ sau khi hết sưng viêm' }
+]
+
+export const patientBilling = [
+  { id: 'INV-2026-001', date: '2026-07-10', description: 'Gói khám sức khỏe tổng quát', amount: 1500000, status: 'paid' },
+  { id: 'INV-2026-002', date: '2026-05-12', description: 'Khám nội, Thuốc viêm họng', amount: 350000, status: 'paid' },
+  { id: 'INV-2026-003', date: '2026-01-10', description: 'Chụp X-Quang Răng, Khám Răng', amount: 450000, status: 'paid' },
+  { id: 'INV-2026-004', date: '2026-08-15', description: 'Tạm ứng khám chuyên khoa', amount: 200000, status: 'unpaid' }
+]
+
+export const patientNotifications = [
+  { id: 'N1', date: '2026-08-08', time: '08:00', title: 'Nhắc lịch hẹn ngày mai', content: 'Bạn có lịch khám với BS. Lê Tuấn vào lúc 09:30 ngày mai.', read: false },
+  { id: 'N2', date: '2026-08-07', time: '14:30', title: 'Kết quả xét nghiệm', content: 'Kết quả xét nghiệm máu của bạn đã có trên hệ thống.', read: true },
+  { id: 'N3', date: '2026-07-10', time: '11:00', title: 'Thanh toán thành công', content: 'Hoá đơn INV-2026-001 trị giá 1,500,000đ đã được thanh toán.', read: true }
+]
+
+

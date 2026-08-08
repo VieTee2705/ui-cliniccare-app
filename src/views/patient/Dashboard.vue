@@ -6,20 +6,20 @@
     </div>
 
     <!-- Cảnh báo nhắc nhở sức khỏe / Lịch hẹn -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 text-white shadow-lg mb-8 flex items-center justify-between">
+    <div v-if="upcomingAppointment" class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 text-white shadow-lg mb-8 flex items-center justify-between">
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
           <i class="ph-fill ph-calendar-check text-2xl"></i>
         </div>
         <div>
           <p class="font-medium text-blue-100 mb-1">Lịch khám sắp tới</p>
-          <h3 class="text-lg font-bold">Khám Nội chung - 09:30 Ngày mai</h3>
-          <p class="text-sm text-blue-100 mt-1">Phòng khám số 1, Tầng 2. Bác sĩ Lê Tuấn.</p>
+          <h3 class="text-lg font-bold">{{ upcomingAppointment.department }} - {{ upcomingAppointment.time }} {{ upcomingAppointment.date }}</h3>
+          <p class="text-sm text-blue-100 mt-1">Phòng khám số 1, Tầng 2. {{ upcomingAppointment.doctor }}</p>
         </div>
       </div>
-      <button class="bg-white text-indigo-600 hover:bg-slate-50 px-5 py-2.5 rounded-xl font-medium shadow-sm transition-colors text-sm">
+      <router-link to="/patient/dashboard/appointments" class="bg-white text-indigo-600 hover:bg-slate-50 px-5 py-2.5 rounded-xl font-medium shadow-sm transition-colors text-sm">
         Xem chi tiết
-      </button>
+      </router-link>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -48,28 +48,19 @@
           </div>
         </div>
 
-        <h2 class="text-lg font-bold text-slate-800 mb-4">Lịch sử khám bệnh gần đây</h2>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-bold text-slate-800">Lịch sử khám bệnh gần đây</h2>
+          <router-link to="/patient/dashboard/history" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Xem tất cả</router-link>
+        </div>
         <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
-          <div class="p-5 border-b border-slate-100 hover:bg-slate-50 transition-colors flex justify-between items-center cursor-pointer">
+          <div v-for="record in patientHistory.slice(0, 2)" :key="record.id" class="p-5 border-b border-slate-100 hover:bg-slate-50 transition-colors flex justify-between items-center cursor-pointer">
             <div class="flex items-center gap-4">
               <div class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center">
                 <i class="ph-fill ph-stethoscope text-xl"></i>
               </div>
               <div>
-                <h4 class="font-semibold text-slate-800">Khám Tổng quát</h4>
-                <p class="text-xs text-slate-500 mt-0.5">12/05/2026 • BS. Lê Tuấn</p>
-              </div>
-            </div>
-            <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-100 text-emerald-700">Đã hoàn thành</span>
-          </div>
-          <div class="p-5 hover:bg-slate-50 transition-colors flex justify-between items-center cursor-pointer">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center">
-                <i class="ph-fill ph-tooth text-xl"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold text-slate-800">Nhổ răng khôn</h4>
-                <p class="text-xs text-slate-500 mt-0.5">10/01/2026 • BS. Nguyễn Hà</p>
+                <h4 class="font-semibold text-slate-800">{{ record.diagnosis }}</h4>
+                <p class="text-xs text-slate-500 mt-0.5">{{ record.date }} • {{ record.doctor }}</p>
               </div>
             </div>
             <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-100 text-emerald-700">Đã hoàn thành</span>
@@ -84,15 +75,14 @@
             <i class="ph-fill ph-pill text-indigo-500"></i>
             Đơn thuốc đang dùng
           </h2>
-          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-            <h4 class="font-semibold text-slate-800 mb-1">Amoxicillin 500mg</h4>
-            <p class="text-xs text-slate-500 mb-3">Ngày uống 2 lần, mỗi lần 1 viên sau ăn.</p>
+          <div v-if="currentPrescription" class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <h4 class="font-semibold text-slate-800 mb-1">{{ currentPrescription.split(',')[0] }}</h4>
+            <p class="text-xs text-slate-500 mb-3">Sử dụng theo chỉ định của bác sĩ.</p>
             <div class="w-full bg-slate-200 rounded-full h-2 mb-1">
               <div class="bg-indigo-600 h-2 rounded-full" style="width: 70%"></div>
             </div>
             <div class="flex justify-between text-xs text-slate-500">
-              <span>Còn 4 viên</span>
-              <span>Đã uống 10 viên</span>
+              <span>Đang sử dụng</span>
             </div>
           </div>
         </div>
@@ -114,5 +104,17 @@
 </template>
 
 <script setup>
-import { users } from '../../data';
+import { computed } from 'vue';
+import { users, patientAppointments, patientHistory } from '../../data';
+
+const upcomingAppointment = computed(() => {
+  return patientAppointments.find(apt => apt.status === 'upcoming');
+});
+
+const currentPrescription = computed(() => {
+  if (patientHistory.length > 0 && patientHistory[0].prescription) {
+    return patientHistory[0].prescription;
+  }
+  return null;
+});
 </script>
