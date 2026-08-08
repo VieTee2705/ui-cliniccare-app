@@ -82,3 +82,34 @@ export const services = [
   { id: 'S7', name: 'Chụp X-Quang Phổi', price: 180000, category: 'Cận lâm sàng' },
   { id: 'S8', name: 'Khám Sản Phụ Khoa', price: 250000, category: 'Khám bệnh' },
 ]
+
+export const schedules = [
+  { id: 1, title: 'Khám Nội - BN Trần Văn Bình', date: new Date().toISOString().split('T')[0], time: '08:00', type: 'appointment', color: 'bg-blue-100 text-blue-700 border-blue-200' },
+  { id: 2, title: 'Khám Nội - BN Phạm Thị Mai', date: new Date().toISOString().split('T')[0], time: '09:00', type: 'appointment', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' },
+  { id: 3, title: 'Hội chẩn khoa', date: new Date().toISOString().split('T')[0], time: '11:00', type: 'meeting', color: 'bg-orange-100 text-orange-700 border-orange-200' },
+  { id: 4, title: 'Khám Nội - BN Lý Công Nhật', date: new Date().toISOString().split('T')[0], time: '14:00', type: 'appointment', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
+  { id: 5, title: 'Nghỉ bù', date: new Date(Date.now() + 86400000).toISOString().split('T')[0], time: 'All day', type: 'leave', color: 'bg-slate-100 text-slate-600 border-slate-200' }
+]
+
+export const chartData = {
+  weeklyPatients: {
+    labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
+    datasets: [
+      {
+        label: 'Số ca khám',
+        backgroundColor: '#4f46e5',
+        data: [25, 32, 28, 45, 38, 20, 0]
+      }
+    ]
+  },
+  serviceDistribution: {
+    labels: ['Khám bệnh', 'Cận lâm sàng', 'Tiểu phẫu'],
+    datasets: [
+      {
+        backgroundColor: ['#4f46e5', '#10b981', '#f59e0b'],
+        data: [60, 30, 10]
+      }
+    ]
+  }
+}
+

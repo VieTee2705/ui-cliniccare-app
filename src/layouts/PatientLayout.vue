@@ -47,15 +47,18 @@
       <header class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-100 flex items-center justify-end px-8 z-10 shrink-0">
         <!-- Right Actions -->
         <div class="flex items-center gap-6">
-          <router-link to="/patient/booking" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow-soft text-sm flex items-center gap-2">
+          <router-link to="/patient/booking" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow-soft text-sm flex items-center gap-2 transition-colors">
             <i class="ph-bold ph-plus"></i> Đặt lịch mới
           </router-link>
 
           <!-- Notifications -->
-          <button class="relative p-2 text-slate-400 hover:text-indigo-600 transition-colors rounded-full hover:bg-indigo-50">
-            <i class="ph ph-bell text-2xl"></i>
-            <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
-          </button>
+          <div class="relative">
+            <button @click="showNotifications = !showNotifications" class="relative p-2 text-slate-400 hover:text-indigo-600 transition-colors rounded-full hover:bg-indigo-50 focus:outline-none focus:bg-indigo-50 focus:text-indigo-600">
+              <i class="ph ph-bell text-2xl"></i>
+              <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+            <NotificationDropdown :is-open="showNotifications" />
+          </div>
 
           <!-- User Profile -->
           <div class="flex items-center gap-3 pl-4 border-l border-slate-200 cursor-pointer group">
@@ -78,10 +81,13 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { users } from '../data';
+import NotificationDropdown from '../components/NotificationDropdown.vue';
 
 const route = useRoute();
+const showNotifications = ref(false);
 
 const menu = [
   { name: 'Tổng quan', path: '/patient/dashboard', icon: 'ph ph-squares-four' },

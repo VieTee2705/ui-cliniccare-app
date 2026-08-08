@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-  { path: "/home", redirect: "/patient" },
-  { path: "/menu", name: "Menu", component: () => import("../views/Menu.vue") },
+  { path: "/", name: "PortalMenu", component: () => import("../views/PortalMenu.vue") },
 
   // Patient Portal
   {

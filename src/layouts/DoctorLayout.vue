@@ -56,6 +56,11 @@
 
         <!-- Right Actions -->
         <div class="flex items-center gap-6">
+          <!-- Add Button -->
+          <button @click="showAddModal = true" class="hidden sm:flex bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-medium shadow-soft text-sm items-center gap-2 transition-colors">
+            <i class="ph-bold ph-plus"></i> Thêm mới
+          </button>
+
           <!-- Clock -->
           <div class="text-sm font-medium text-slate-500 bg-slate-100 px-4 py-2 rounded-full flex items-center gap-2">
             <i class="ph ph-clock text-indigo-500"></i>
@@ -63,10 +68,13 @@
           </div>
 
           <!-- Notifications -->
-          <button class="relative p-2 text-slate-400 hover:text-indigo-600 transition-colors rounded-full hover:bg-indigo-50">
-            <i class="ph ph-bell text-2xl"></i>
-            <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
-          </button>
+          <div class="relative">
+            <button @click="showNotifications = !showNotifications" class="relative p-2 text-slate-400 hover:text-indigo-600 transition-colors rounded-full hover:bg-indigo-50 focus:outline-none focus:bg-indigo-50 focus:text-indigo-600">
+              <i class="ph ph-bell text-2xl"></i>
+              <span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+            <NotificationDropdown :is-open="showNotifications" />
+          </div>
 
           <!-- User Profile -->
           <div class="flex items-center gap-3 pl-4 border-l border-slate-200 cursor-pointer group">
@@ -85,6 +93,9 @@
       </div>
       
     </main>
+
+    <!-- Global Modals -->
+    <AddModal :is-open="showAddModal" @close="showAddModal = false" />
   </div>
 </template>
 
@@ -92,8 +103,12 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { users } from '../data';
+import NotificationDropdown from '../components/NotificationDropdown.vue';
+import AddModal from '../components/AddModal.vue';
 
 const route = useRoute();
+const showNotifications = ref(false);
+const showAddModal = ref(false);
 
 const menu = [
   { name: 'Dashboard', path: '/doctor/dashboard', icon: 'ph ph-squares-four' },
