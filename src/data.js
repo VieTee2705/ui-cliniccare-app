@@ -139,4 +139,53 @@ export const patientNotifications = [
   { id: 'N3', date: '2026-07-10', time: '11:00', title: 'Thanh toán thành công', content: 'Hoá đơn INV-2026-001 trị giá 1,500,000đ đã được thanh toán.', read: true }
 ]
 
+export const allAppointments = [
+  { id: 'A001', patientId: 'P01', patientName: 'Trần Văn Bình', phone: '0901234567', doctorId: 'D01', doctorName: 'BS. Lê Tuấn', department: 'Khoa Nội chung', date: '2026-08-10', time: '08:30', status: 'pending', note: 'Khám dạ dày' },
+  { id: 'A002', patientId: 'P02', patientName: 'Phạm Thị Mai', phone: '0912345678', doctorId: 'D02', doctorName: 'BS. Vũ Đức', department: 'Khoa Xét nghiệm', date: '2026-08-10', time: '09:00', status: 'confirmed', note: 'Xét nghiệm máu định kỳ' },
+  { id: 'A003', patientId: 'P03', patientName: 'Hoàng Kim Yến', phone: '0923456789', doctorId: 'D03', doctorName: 'BS. Nguyễn Hà', department: 'Răng Hàm Mặt', date: '2026-08-10', time: '10:15', status: 'cancelled', note: 'Bệnh nhân báo bận' },
+  { id: 'A004', patientId: 'P06', patientName: 'Lê Ngọc Hoa', phone: '0956789012', doctorId: 'D05', doctorName: 'BS. Phạm Hùng', department: 'Chẩn đoán hình ảnh', date: '2026-08-10', time: '13:30', status: 'pending', note: 'Siêu âm 4D' },
+  { id: 'A005', patientId: 'P10', patientName: 'Nguyễn Cẩm Tú', phone: '0990123456', doctorId: 'D06', doctorName: 'BS. Lê Ngọc', department: 'Sản Phụ Khoa', date: '2026-08-11', time: '08:00', status: 'confirmed', note: 'Khám thai định kỳ' }
+]
 
+export const allInvoices = [
+  { id: 'INV-0809-01', patientId: 'P01', patientName: 'Trần Văn Bình', phone: '0901234567', services: ['Khám Nội chung', 'Thuốc'], total: 450000, date: '2026-08-09T08:30:00', status: 'paid' },
+  { id: 'INV-0809-02', patientId: 'P02', patientName: 'Phạm Thị Mai', phone: '0912345678', services: ['Xét nghiệm Máu', 'Siêu âm Ổ bụng'], total: 600000, date: '2026-08-09T09:15:00', status: 'unpaid' },
+  { id: 'INV-0809-03', patientId: 'P03', patientName: 'Hoàng Kim Yến', phone: '0923456789', services: ['Nhổ răng khôn', 'Thuốc'], total: 1650000, date: '2026-08-09T10:45:00', status: 'unpaid' },
+  { id: 'INV-0809-04', patientId: 'P05', patientName: 'Ngô Thanh Sơn', phone: '0945678901', services: ['Khám Tổng quát'], total: 200000, date: '2026-08-09T14:20:00', status: 'paid' },
+  { id: 'INV-0809-05', patientId: 'P09', patientName: 'Bùi Gia Bảo', phone: '0989012345', services: ['Khám Nhi', 'Thuốc'], total: 350000, date: '2026-08-09T15:30:00', status: 'paid' }
+]
+
+export const pharmacyQueue = [
+  { id: 'RX-0809-01', patientId: 'P01', patientName: 'Trần Văn Bình', doctorName: 'BS. Lê Tuấn', date: '2026-08-09T09:00:00', status: 'waiting', medicines: [{ name: 'Omeprazole 20mg', quantity: 14, unit: 'Viên' }, { name: 'Phosphalugel', quantity: 10, unit: 'Gói' }] },
+  { id: 'RX-0809-02', patientId: 'P03', patientName: 'Hoàng Kim Yến', doctorName: 'BS. Nguyễn Hà', date: '2026-08-09T11:00:00', status: 'waiting', medicines: [{ name: 'Ibuprofen 400mg', quantity: 10, unit: 'Viên' }, { name: 'Amoxicillin 500mg', quantity: 14, unit: 'Viên' }] },
+  { id: 'RX-0809-03', patientId: 'P09', patientName: 'Bùi Gia Bảo', doctorName: 'BS. Trần Kim', date: '2026-08-09T16:00:00', status: 'dispensed', medicines: [{ name: 'Paracetamol 250mg', quantity: 10, unit: 'Gói' }, { name: 'Oresol', quantity: 5, unit: 'Gói' }] },
+  { id: 'RX-0809-04', patientId: 'P05', patientName: 'Ngô Thanh Sơn', doctorName: 'BS. Lê Tuấn', date: '2026-08-09T14:45:00', status: 'waiting', medicines: [{ name: 'Vitamin C 500mg', quantity: 20, unit: 'Viên' }] }
+]
+
+export const receptionistReports = {
+  revenueChart: {
+    labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
+    datasets: [
+      {
+        label: 'Doanh thu (Triệu VNĐ)',
+        backgroundColor: '#10b981',
+        data: [42, 48, 55, 38, 62, 75, 45]
+      }
+    ]
+  },
+  patientChart: {
+    labels: ['Khám mới', 'Tái khám', 'Khám định kỳ'],
+    datasets: [
+      {
+        backgroundColor: ['#3b82f6', '#f59e0b', '#8b5cf6'],
+        data: [145, 85, 30]
+      }
+    ]
+  },
+  metrics: {
+    totalRevenue: '365,000,000',
+    totalPatients: 260,
+    newPatients: 145,
+    prescriptions: 180
+  }
+}
